@@ -8,31 +8,31 @@ export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface =
   const flares = ref<FlareInterface[]>([
     {
       id: "1",
-      title: "Title",
+      title: "Success",
       message: "",
       type: FlareTypeEnum.SUCCESS
     },
     {
       id: "2",
-      title: "Title",
-      message: "message",
+      title: "Info",
+      message: "Message",
       type: FlareTypeEnum.INFO
     },
     {
       id: "3",
-      title: "Title",
-      message: "message",
+      title: "Error",
+      message: "Message",
       type: FlareTypeEnum.ERROR
     },
     {
       id: "4",
-      title: "Title",
-      message: "message",
+      title: "Warning",
+      message: "Message",
       type: FlareTypeEnum.WARNING
     }
   ])
 
-  function show (id: string, title: string, message: string, type: FlareTypeEnum, duration: number) {
+  function show (id: string, title: string, message: string, type: FlareTypeEnum , duration: number) {
     flares.value.push({ id, title, message, type })
 
     setTimeout(() => {

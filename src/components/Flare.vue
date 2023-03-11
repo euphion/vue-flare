@@ -1,20 +1,13 @@
 <template>
-  <div
-      :class="['flare', {
-      'flare--success': flare.type === FlareTypeEnum.SUCCESS,
-      'flare--info': flare.type === FlareTypeEnum.INFO,
-      'flare--warning': flare.type === FlareTypeEnum.WARNING,
-      'flare--error': flare.type === FlareTypeEnum.ERROR
-    }]"
-  >
+  <div :class="flareClasses">
     <svg class="flare__icon">
       <use :xlink:href="`/icons.svg#${iconIdentifier}`" />
     </svg>
     <div class="flare__title">
-      {{ flare.title }}
+      {{ title }}
     </div>
-    <div v-if="flare.message" class="flare__message">
-      {{ flare.message }}
+    <div v-if="message" class="flare__message">
+      {{ message }}
     </div>
     <button class="flare__close" @click="emit('close')">
       <svg>
@@ -26,16 +19,31 @@
 
 <script setup lang="ts">
 import {computed, PropType} from "vue"
-import { FlareInterface } from "../interfaces/FlareInterface";
 import { FlareTypeEnum } from "../enums/FlareTypeEnum"
 
 const emit = defineEmits(["close"])
 
 const props = defineProps({
-  flare: {
-    type: Object as PropType<FlareInterface>,
+  type: {
+    type: String as PropType<FlareTypeEnum>,
+    required: true,
+    validator(value: FlareTypeEnum) {
+      return [
+        FlareTypeEnum.SUCCESS,
+        FlareTypeEnum.INFO,
+        FlareTypeEnum.WARNING,
+        FlareTypeEnum.ERROR
+      ].includes(value)
+    }
+  },
+  title: {
+    type: String,
     required: true
-  }
+  },
+  message: {
+    type: String,
+    default: ""
+  },
 })
 
 const iconMap = {
@@ -46,11 +54,27 @@ const iconMap = {
 };
 
 const iconIdentifier = computed<string>(() => {
-  return iconMap[props.flare.type] || "info";
+  return iconMap[props.type] || "info";
 });
+
+const flareClasses = computed(() => ['flare', {
+  'flare--success': props.type === FlareTypeEnum.SUCCESS,
+  'flare--info': props.type === FlareTypeEnum.INFO,
+  'flare--warning': props.type === FlareTypeEnum.WARNING,
+  'flare--error': props.type === FlareTypeEnum.ERROR
+}])
 </script>
 
 <style scoped lang="scss">
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .flare {
   color: #ffffff;
   display: flex;
@@ -62,6 +86,7 @@ const iconIdentifier = computed<string>(() => {
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  animation: fadeInAnimation ease 1s;
 
   &__icon {
     width: 40px;

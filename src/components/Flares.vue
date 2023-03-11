@@ -1,10 +1,12 @@
 <template>
   <div :class="['flares']">
     <Flare
-        v-for="flare in flareStore.flares"
-        :key="flare.id"
-        :flare="flare"
-        @close="flareStore.hide(flare.id)"
+        v-for="{ id, type, title, message } of flareStore.flares"
+        :key="`flare-${id}`"
+        :type="type"
+        :title="title"
+        :message="message"
+        @close="flareStore.hide(id)"
     />
   </div>
 </template>
@@ -19,7 +21,7 @@ const flareStore = useFlareStore()
 <style scoped lang="scss">
 .flares {
   position: fixed;
-  top: 50px;
+  top: 30px;
   width: 100%;
   right: 10px;
   max-width: 400px;
