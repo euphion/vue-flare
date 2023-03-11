@@ -18,7 +18,7 @@ import {FlareTypeEnum} from "./enums/FlareTypeEnum";
 const flareStore = useFlareStore()
 
 function add() {
-  flareStore.show(Math.random().toString(), "Hello", "Message", FlareTypeEnum.SUCCESS, 5000)
+  flareStore.show(Math.random().toString(), "Hello", "Message", FlareTypeEnum.SUCCESS, 5)
 }
 </script>
 

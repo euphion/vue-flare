@@ -36,6 +36,7 @@ export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface =
     flares.value.push({ id, title, message, type })
 
     setTimeout(() => {
+      console.log("skdhskdhs")
       hide(id)
     }, duration * 1000)
   }
