@@ -7,71 +7,137 @@
       'flare--error': flare.type === FlareTypeEnum.ERROR
     }]"
   >
-    <div class="flare__message">
+    <svg class="flare__icon">
+      <use :xlink:href="`/icons.svg#${iconIdentifier}`" />
+    </svg>
+    <div class="flare__title">
+      {{ flare.title }}
+    </div>
+    <div v-if="flare.message" class="flare__message">
       {{ flare.message }}
     </div>
-    <button @click="emit('close')">
-      close
+    <button class="flare__close" @click="emit('close')">
+      <svg>
+        <use :xlink:href="`/icons.svg#close`" />
+      </svg>
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue"
+import {computed, PropType} from "vue"
 import { FlareInterface } from "../interfaces/FlareInterface";
 import { FlareTypeEnum } from "../enums/FlareTypeEnum"
 
 const emit = defineEmits(["close"])
 
-defineProps({
+const props = defineProps({
   flare: {
     type: Object as PropType<FlareInterface>,
     required: true
   }
 })
+
+const iconMap = {
+  [FlareTypeEnum.SUCCESS]: "check",
+  [FlareTypeEnum.INFO]: "info",
+  [FlareTypeEnum.WARNING]: "error",
+  [FlareTypeEnum.ERROR]: "error",
+};
+
+const iconIdentifier = computed<string>(() => {
+  return iconMap[props.flare.type] || "info";
+});
 </script>
 
 <style scoped lang="scss">
 .flare {
-  align-items: center;
   color: #ffffff;
   display: flex;
-  height: 100%;
   justify-content: space-between;
-  margin: 0 auto;
-  max-width: 600px;
-  min-height: 50px;
-  padding: 0 20px;
-  width: 100%;
+  padding: 20px 35px 20px 80px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 
-  > :deep(.btn) {
-    flex-shrink: 0;
-    padding: 10px;
+  &__icon {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-    svg {
-      height: 14px;
-      width: 14px;
-    }
+  &__title {
+    font-weight: bold;
+    font-size: 18px;
   }
 
   &__message {
-    padding: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  &__close {
+    all: unset;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    opacity: .7;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 
   &--success {
-    background-color: green;
+    // light - #1fa55a
+    // dark - #0e5f38
+    background-color: rgba(31, 166, 90, 0.8);
+
+    .flare__icon, .flare__close {
+      color: #0e5f38;
+    }
   }
 
   &--info {
-    background-color: blue;
+    // light - #1f6fe0
+    // dark - #10488a
+    background-color: rgba(31, 112, 224, 0.8);
+
+    .flare__icon, .flare__close {
+      color: #10488a;
+    }
   }
 
   &--warning {
-    background-color: orange;
+    // light - #ee8d31
+    // dark - #c34916
+    background-color: rgba(237, 140, 50, 0.8);
+
+    .flare__icon, .flare__close {
+      color: #c34916;
+    }
   }
 
   &--error {
-    background-color: red;
+    // light - #dc3055
+    // dark - #851d41
+    background-color: rgba(219, 48, 85, 0.8);
+
+    .flare__icon, .flare__close {
+      color: #851d41;
+    }
   }
 }
 </style>

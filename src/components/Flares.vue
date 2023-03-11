@@ -21,7 +21,12 @@ const flareStore = useFlareStore()
   position: fixed;
   top: 50px;
   width: 100%;
+  right: 10px;
+  max-width: 400px;
   z-index: 100;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
 
   &--top {
     top: 0;

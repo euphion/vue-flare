@@ -4,6 +4,6 @@ import { FlareTypeEnum } from "../enums/FlareTypeEnum"
 
 export interface FlareStoreInterface {
   flares: Ref<FlareInterface[]>
-  show (id: string, message: string, type: FlareTypeEnum, duration: number): void
+  show (id: string, title: string, message: string, type: FlareTypeEnum, duration: number): void
   hide (id: string): void
 }
