@@ -8,17 +8,20 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/vue-flare.ts'),
-      name: 'VueFlare',
-      fileName: 'vue-flare',
+      name: 'vue-flare',
+      fileName: format => `vue-flare.${format}.js`
     },
     rollupOptions: {
-      external: ["vue"],
+      external: ['vue'],
       output: {
         globals: {
-          vue: "Vue"
-        }
-      }
-    }
+          vue: 'Vue',
+        },
+      },
+    },
   },
-  plugins: [dts(), vue()],
+  plugins: [
+    vue(),
+    dts({ insertTypesEntry: true }),
+  ],
 })

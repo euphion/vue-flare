@@ -14,4 +14,6 @@ export default {
         app.component("Flares", Flares)
         app.component("Flare", Flare)
     }
-} as Plugin
+} as Plugin;
+
+export { Flares, Flare }

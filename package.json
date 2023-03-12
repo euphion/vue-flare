@@ -1,15 +1,18 @@
 {
   "name": "vue-flare",
+  "private": false,
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vue-flare.umd.js",
-  "module": "./dist/vue-flare.js",
+  "module": "./dist/vue-flare.es.js",
   "exports": {
     ".": {
       "require": "./dist/vue-flare.umd.js",
-      "import": "./dist/vue-flare.js"
+      "import": "./dist/vue-flare.es.js"
     }
   },
   "types": "./dist/vue-flare.d.ts",
@@ -26,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^18.15.0",
     "@vitejs/plugin-vue": "^4.0.0",
+    "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vite-plugin-dts": "^2.1.0",
