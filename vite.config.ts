@@ -7,9 +7,9 @@ import dts from "vite-plugin-dts"
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'vue-flare',
-      fileName: (format) => `vue-flare.${format}.js`,
+      entry: path.resolve(__dirname, 'src/vue-flare.ts'),
+      name: 'VueFlare',
+      fileName: 'vue-flare',
     },
     rollupOptions: {
       external: ["vue"],

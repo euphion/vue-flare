@@ -3,19 +3,16 @@
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "main": "./dist/vue-flare.umd.js",
-  "module": "./dist/vue-flare.es.js",
+  "module": "./dist/vue-flare.js",
   "exports": {
     ".": {
       "require": "./dist/vue-flare.umd.js",
-      "import": "./dist/vue-flare.es.js"
-    },
-    "./dist/style.css": "./dist/style.css"
+      "import": "./dist/vue-flare.js"
+    }
   },
-  "types": ".dist/index.d.ts",
+  "types": "./dist/vue-flare.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
