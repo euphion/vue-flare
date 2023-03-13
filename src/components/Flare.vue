@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import {computed, PropType} from "vue"
 import { FlareTypeEnum } from "../enums/FlareTypeEnum"
+import {FlareAnimationEnum} from "../enums/FlareAnimationEnum";
 
 const emit = defineEmits(["close"])
 
@@ -44,6 +45,23 @@ const props = defineProps({
     type: String,
     default: ""
   },
+  borderRadius: {
+    type: Boolean,
+    default: false
+  },
+  animation: {
+    type: String as PropType<FlareAnimationEnum>,
+    default: FlareAnimationEnum.FADE_IN,
+    validator(value: FlareAnimationEnum) {
+      return [
+        FlareAnimationEnum.FADE_IN,
+        FlareAnimationEnum.FADE_TOP,
+        FlareAnimationEnum.FADE_RIGHT,
+        FlareAnimationEnum.FADE_BOTTOM,
+        FlareAnimationEnum.FADE_LEFT
+      ].includes(value)
+    }
+  },
 })
 
 const iconMap = {
@@ -57,24 +75,19 @@ const iconIdentifier = computed<string>(() => {
   return iconMap[props.type] || "info";
 });
 
-const flareClasses = computed(() => ['flare', {
-  'flare--success': props.type === FlareTypeEnum.SUCCESS,
-  'flare--info': props.type === FlareTypeEnum.INFO,
-  'flare--warning': props.type === FlareTypeEnum.WARNING,
-  'flare--error': props.type === FlareTypeEnum.ERROR
-}])
+const flareClasses = computed(() => [
+  'flare', `flare--animation-${props.animation}`,
+  {
+    'flare--success': props.type === FlareTypeEnum.SUCCESS,
+    'flare--info': props.type === FlareTypeEnum.INFO,
+    'flare--warning': props.type === FlareTypeEnum.WARNING,
+    'flare--error': props.type === FlareTypeEnum.ERROR,
+    'flare--border-radius': props.borderRadius,
+  }
+])
 </script>
 
 <style scoped lang="scss">
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .flare {
   color: #ffffff;
   display: flex;
@@ -82,11 +95,33 @@ const flareClasses = computed(() => ['flare', {
   padding: 20px 35px 20px 80px;
   backdrop-filter: blur(10px);
   position: relative;
-  border-radius: 10px;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  animation: fadeInAnimation ease 1s;
+
+  &--border-radius {
+    border-radius: 10px;
+  }
+
+  &--animation-fade-in {
+    animation: fadeIn ease .5s;
+  }
+
+  &--animation-fade-top {
+    animation: fadeTop ease .5s;
+  }
+
+  &--animation-fade-right {
+    animation: fadeRight ease .5s;
+  }
+
+  &--animation-fade-bottom {
+    animation: fadeBottom ease .5s;
+  }
+
+  &--animation-fade-left {
+    animation: fadeLeft ease .5s;
+  }
 
   &__icon {
     width: 40px;
@@ -162,6 +197,55 @@ const flareClasses = computed(() => ['flare', {
 
     .flare__icon, .flare__close {
       color: #851d41;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeTop {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeRight {
+    from {
+      opacity: 0;
+      transform: translateX(400px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeBottom {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-400px);
+    }
+    to {
+      opacity: 1;
     }
   }
 }

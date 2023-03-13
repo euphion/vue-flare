@@ -4,5 +4,5 @@ export interface FlareInterface {
   id: string
   title: string
   message: string
-  type: FlareTypeEnum
+  type: "success" | "info" | "warning" | "error"
 }

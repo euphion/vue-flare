@@ -13,12 +13,12 @@
 <script setup lang="ts">
 import Flares from "./components/Flares.vue";
 import { useFlareStore } from "./stores/FlareStore"
-import {FlareTypeEnum} from "./enums/FlareTypeEnum";
 
 const flareStore = useFlareStore()
+flareStore.setSettings({ duration: 5000 })
 
 function add() {
-  flareStore.show(Math.random().toString(), "Hello", "Message", FlareTypeEnum.SUCCESS, 5)
+  flareStore.success({ title: "Ahojky" })
 }
 </script>
 

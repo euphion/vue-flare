@@ -6,6 +6,8 @@
         :type="type"
         :title="title"
         :message="message"
+        border-radius
+        animation="fade-left"
         @close="flareStore.hide(id)"
     />
   </div>
@@ -25,14 +27,31 @@ const flareStore = useFlareStore()
   width: 100%;
   right: 10px;
   max-width: 400px;
-  z-index: 100;
+  z-index: 500;
   display: flex;
   gap: 10px;
   flex-direction: column;
 
-  &--top {
-    top: 0;
-    z-index: 200;
+  &--top-left {
+    top: 30px;
+    left: 10px;
   }
+
+  &--top-right {
+    top: 30px;
+    right: 10px;
+  }
+
+  &--bottom-left {
+    bottom: 30px;
+    left: 10px;
+  }
+
+  &--bottom-right {
+    bottom: 30px;
+    right: 10px;
+  }
+
+
 }
 </style>

@@ -1,10 +1,20 @@
-import { defineStore } from "pinia"
-import { ref } from "vue"
-import { FlareStoreInterface } from "../interfaces/FlareStoreInterface"
-import { FlareTypeEnum } from "../enums/FlareTypeEnum"
-import { FlareInterface } from "../interfaces/FlareInterface"
+import {defineStore} from "pinia"
+import {reactive, ref} from "vue"
+import {FlareStoreInterface} from "../interfaces/FlareStoreInterface"
+import {FlareTypeEnum} from "../enums/FlareTypeEnum"
+import {FlareInterface} from "../interfaces/FlareInterface"
+import {ShowInput} from "../interfaces/ShowInterface";
+import {FlareSettingsInterface} from "../interfaces/FlareSettingsInterface";
 
 export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface => {
+  const settings = ref<FlareSettingsInterface>({
+    duration: 5000
+  })
+
+  function setSettings(newSettings: FlareSettingsInterface) {
+    settings.value = {...settings.value, ...newSettings}
+  }
+
   const flares = ref<FlareInterface[]>([
     {
       id: "1",
@@ -32,18 +42,38 @@ export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface =
     }
   ])
 
-  function show (id: string, title: string, message: string, type: FlareTypeEnum , duration: number) {
+  function show ({
+        id = self.crypto.randomUUID(),
+        title, message = "",
+        type,
+        duration = settings.value.duration
+  }: ShowInput) {
     flares.value.push({ id, title, message, type })
 
     setTimeout(() => {
-      console.log("skdhskdhs")
       hide(id)
-    }, duration * 1000)
+    }, duration)
   }
 
   function hide (id: string) {
     flares.value = flares.value.filter(flare => flare.id !== id)
   }
 
-  return { flares, show, hide }
+  function success (input: Omit<ShowInput, 'type'>) {
+    show({...input, type: FlareTypeEnum.SUCCESS })
+  }
+
+  function info (input: Omit<ShowInput, 'type'>) {
+    show({...input, type: FlareTypeEnum.INFO })
+  }
+
+  function error (input: Omit<ShowInput, 'type'>) {
+    show({...input, type: FlareTypeEnum.ERROR })
+  }
+
+  function warning (input: Omit<ShowInput, 'type'>) {
+    show({...input, type: FlareTypeEnum.WARNING })
+  }
+
+  return { settings, setSettings, flares, show, hide, success, info, error, warning }
 })
