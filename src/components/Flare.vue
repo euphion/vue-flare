@@ -19,8 +19,8 @@
 
 <script setup lang="ts">
 import {computed, PropType} from "vue"
-import { FlareTypeEnum } from "../enums/FlareTypeEnum"
-import {FlareAnimationEnum} from "../enums/FlareAnimationEnum";
+import { FlareTypeEnum } from "~/enums/FlareTypeEnum"
+import { FlareAnimationEnum } from "~/enums/FlareAnimationEnum";
 
 const emit = defineEmits(["close"])
 
@@ -71,7 +71,7 @@ const iconMap = {
   [FlareTypeEnum.ERROR]: "error",
 };
 
-const iconIdentifier = computed<string>(() => {
+const iconIdentifier = computed(() => {
   return iconMap[props.type] || "info";
 });
 
@@ -232,7 +232,7 @@ const flareClasses = computed(() => [
   @keyframes fadeBottom {
     from {
       opacity: 0;
-      transform: translateY(-100px);
+      transform: translateY(100px);
     }
     to {
       opacity: 1;

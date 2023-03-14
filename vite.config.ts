@@ -24,4 +24,9 @@ export default defineConfig({
     vue(),
     dts({ insertTypesEntry: true }),
   ],
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, 'src'),
+    },
+  },
 })

@@ -1,31 +1,74 @@
 <template>
-  <div :class="['flares']">
+  <div :class="flaresClasses">
     <Flare
         v-for="{ id, type, title, message } of flareStore.flares"
         :key="`flare-${id}`"
         :type="type"
         :title="title"
         :message="message"
-        border-radius
-        animation="fade-left"
+        :animation="animation"
+        :border-radius="borderRadius"
         @close="flareStore.hide(id)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import Flare from "./Flare.vue"
-import { useFlareStore } from "../stores/FlareStore"
+import Flare from "~/components/Flare.vue"
+import { useFlareStore } from "~/stores/FlareStore"
+import { FlareAnimationEnum } from "~/enums/FlareAnimationEnum";
+import { computed, PropType } from "vue";
+import { FlarePositionEnum } from "~/enums/FlarePositionEnum";
+
+const props = defineProps({
+  position: {
+    type: String as PropType<FlarePositionEnum>,
+    default: FlarePositionEnum.TOP_RIGHT,
+    validator(value: FlarePositionEnum) {
+      return [
+        FlarePositionEnum.TOP_LEFT,
+        FlarePositionEnum.TOP_RIGHT,
+        FlarePositionEnum.BOTTOM_LEFT,
+        FlarePositionEnum.BOTTOM_RIGHT
+      ].includes(value)
+    }
+  },
+  animation: {
+    type: String as PropType<FlareAnimationEnum>,
+    default: FlareAnimationEnum.FADE_IN,
+    validator(value: FlareAnimationEnum) {
+      return [
+        FlareAnimationEnum.FADE_IN,
+        FlareAnimationEnum.FADE_TOP,
+        FlareAnimationEnum.FADE_RIGHT,
+        FlareAnimationEnum.FADE_BOTTOM,
+        FlareAnimationEnum.FADE_LEFT
+      ].includes(value)
+    }
+  },
+  borderRadius: {
+    type: Boolean,
+    default: false
+  },
+})
 
 const flareStore = useFlareStore()
+
+const flaresClasses = computed(() => [
+  'flares',
+  {
+    'flares--top-left': props.position === FlarePositionEnum.TOP_LEFT,
+    'flares--top-right': props.position === FlarePositionEnum.TOP_RIGHT,
+    'flares--bottom-left': props.position === FlarePositionEnum.BOTTOM_LEFT,
+    'flares--bottom-right': props.position === FlarePositionEnum.BOTTOM_RIGHT,
+  }
+])
 </script>
 
 <style scoped lang="scss">
 .flares {
   position: fixed;
-  top: 30px;
   width: 100%;
-  right: 10px;
   max-width: 400px;
   z-index: 500;
   display: flex;
@@ -51,7 +94,5 @@ const flareStore = useFlareStore()
     bottom: 30px;
     right: 10px;
   }
-
-
 }
 </style>

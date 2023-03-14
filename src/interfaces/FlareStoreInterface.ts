@@ -1,12 +1,11 @@
 import { Ref } from "vue"
-import { FlareInterface } from "./FlareInterface"
-import { FlareTypeEnum } from "../enums/FlareTypeEnum"
-import {ShowInput} from "./ShowInterface";
-import {FlareSettingsInterface} from "./FlareSettingsInterface";
+import { FlareInterface } from "~/interfaces/FlareInterface"
+import { ShowInput } from "~/interfaces/ShowInterface";
+import { FlareSettingsInterface } from "~/interfaces/FlareSettingsInterface";
 
 export interface FlareStoreInterface {
   settings: Ref<FlareSettingsInterface>
-  setSettings(newSettings: FlareSettingsInterface): void
+  setSettings (newSettings: FlareSettingsInterface): void
   flares: Ref<FlareInterface[]>
   show (input: ShowInput): void
   hide (id: string): void

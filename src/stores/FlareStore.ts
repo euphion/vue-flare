@@ -1,10 +1,10 @@
-import {defineStore} from "pinia"
-import {reactive, ref} from "vue"
-import {FlareStoreInterface} from "../interfaces/FlareStoreInterface"
-import {FlareTypeEnum} from "../enums/FlareTypeEnum"
-import {FlareInterface} from "../interfaces/FlareInterface"
-import {ShowInput} from "../interfaces/ShowInterface";
-import {FlareSettingsInterface} from "../interfaces/FlareSettingsInterface";
+import { defineStore } from "pinia"
+import { ref } from "vue"
+import { FlareStoreInterface } from "~/interfaces/FlareStoreInterface"
+import { FlareTypeEnum } from "~/enums/FlareTypeEnum"
+import { FlareInterface } from "~/interfaces/FlareInterface"
+import { ShowInput } from "~/interfaces/ShowInterface";
+import { FlareSettingsInterface } from "~/interfaces/FlareSettingsInterface";
 
 export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface => {
   const settings = ref<FlareSettingsInterface>({
@@ -12,7 +12,7 @@ export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface =
   })
 
   function setSettings(newSettings: FlareSettingsInterface) {
-    settings.value = {...settings.value, ...newSettings}
+    settings.value = { ...settings.value, ...newSettings }
   }
 
   const flares = ref<FlareInterface[]>([

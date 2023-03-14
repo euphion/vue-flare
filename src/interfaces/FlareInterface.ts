@@ -1,8 +1,8 @@
-import { FlareTypeEnum } from "../enums/FlareTypeEnum"
+import { FlareTypeEnum } from "~/enums/FlareTypeEnum"
 
 export interface FlareInterface {
   id: string
   title: string
   message: string
-  type: "success" | "info" | "warning" | "error"
+  type: FlareTypeEnum
 }
