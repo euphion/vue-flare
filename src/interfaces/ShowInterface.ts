@@ -1,4 +1,4 @@
-import { FlareTypeEnum } from "~/enums/FlareTypeEnum";
+import { FlareTypeEnum } from '~/enums/FlareTypeEnum'
 
 export interface ShowInput {
   id?: string;

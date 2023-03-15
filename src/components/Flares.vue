@@ -2,27 +2,27 @@
   <div :class="flaresClasses">
     <slot v-if="$slots.default" />
     <Flare
-        v-else
-        v-for="{ id, type, title, message, duration } of flareStore.flares"
-        :key="`flare-${id}`"
-        :type="type"
-        :title="title"
-        :message="message"
-        :duration="duration"
-        :animation="animation"
-        :border-radius="borderRadius"
-        :backdrop-filter-blur="backdropFilterBlur"
-        @close="flareStore.hide(id)"
+      v-for="{ id, type, title, message, duration } of flareStore.flares"
+      v-else
+      :key="`flare-${id}`"
+      :type="type"
+      :title="title"
+      :message="message"
+      :duration="duration"
+      :animation="animation"
+      :border-radius="borderRadius"
+      :backdrop-filter-blur="backdropFilterBlur"
+      @close="flareStore.hide(id)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import Flare from "~/components/Flare.vue"
-import { useFlareStore } from "~/stores/FlareStore"
-import { FlareAnimationEnum } from "~/enums/FlareAnimationEnum";
-import { computed, PropType } from "vue";
-import { FlarePositionEnum } from "~/enums/FlarePositionEnum";
+import Flare from '~/components/Flare.vue'
+import { useFlareStore } from '~/stores/FlareStore'
+import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
+import { computed, PropType } from 'vue'
+import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
 
 const props = defineProps({
   position: {

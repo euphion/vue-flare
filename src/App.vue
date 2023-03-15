@@ -1,76 +1,138 @@
 <template>
   <Flares
-      :position="settings.position"
-      :animation="settings.animation"
-      :border-radius="settings.borderRadius"
-      :backdrop-filter-blur="settings.backdropFilterBlur"
+    :position="settings.position"
+    :animation="settings.animation"
+    :border-radius="settings.borderRadius"
+    :backdrop-filter-blur="settings.backdropFilterBlur"
   />
   <div class="vue-flare">
-    <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    <img
+      src="./assets/vue.svg"
+      class="logo vue"
+      alt="Vue logo"
+    >
     <h1>VueFlare</h1>
     <fieldset>
       <label>
         Title
-        <input v-model="settings.title" type="text" name="title">
+        <input
+          v-model="settings.title"
+          type="text"
+          name="title"
+        >
       </label>
     </fieldset>
     <fieldset>
-      <textarea v-model="settings.message" name="message" rows="4" cols="50" />
+      <textarea
+        v-model="settings.message"
+        name="message"
+        rows="4"
+        cols="50"
+      />
     </fieldset>
     <fieldset>
       <label>
         Duration
-        <input v-model="settings.duration" type="number" step="1000" name="duration">
+        <input
+          v-model="settings.duration"
+          type="number"
+          step="1000"
+          name="duration"
+        >
         ms
       </label>
     </fieldset>
     <fieldset>
       <label>
-        <input v-model="settings.borderRadius" type="checkbox" name="border-radius">
+        <input
+          v-model="settings.borderRadius"
+          type="checkbox"
+          name="border-radius"
+        >
         Border radius
       </label>
       <label>
-        <input v-model="settings.backdropFilterBlur" type="checkbox" name="backdrop-filter-blur">
+        <input
+          v-model="settings.backdropFilterBlur"
+          type="checkbox"
+          name="backdrop-filter-blur"
+        >
         Backdrop filter blur
       </label>
     </fieldset>
     <fieldset>
       <h3>Animation</h3>
-      <label v-for="animation of FlareAnimationEnum" :key="`animation-${animation}`">
-        <input v-model="settings.animation" type="radio" name="position" :value="animation">
+      <label
+        v-for="animation of FlareAnimationEnum"
+        :key="`animation-${animation}`"
+      >
+        <input
+          v-model="settings.animation"
+          type="radio"
+          name="position"
+          :value="animation"
+        >
         {{ animation }}
       </label>
     </fieldset>
     <fieldset>
       <h3>Position</h3>
-      <label v-for="position of FlarePositionEnum" :key="`position-${position}`">
-        <input v-model="settings.position" type="radio" name="position" :value="position">
+      <label
+        v-for="position of FlarePositionEnum"
+        :key="`position-${position}`"
+      >
+        <input
+          v-model="settings.position"
+          type="radio"
+          name="position"
+          :value="position"
+        >
         {{ position }}
       </label>
     </fieldset>
     <div class="actions">
-      <button type="button" @click="success">success</button>
-      <button type="button" @click="info">info</button>
-      <button type="button" @click="error">error</button>
-      <button type="button" @click="warning">warning</button>
+      <button
+        type="button"
+        @click="success"
+      >
+        success
+      </button>
+      <button
+        type="button"
+        @click="info"
+      >
+        info
+      </button>
+      <button
+        type="button"
+        @click="error"
+      >
+        error
+      </button>
+      <button
+        type="button"
+        @click="warning"
+      >
+        warning
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Flares from "~/components/Flares.vue";
-import { useFlareStore } from "~/stores/FlareStore"
-import { reactive, watch } from "vue";
-import { FlareAnimationEnum } from "~/enums/FlareAnimationEnum";
-import { FlarePositionEnum } from "~/enums/FlarePositionEnum";
+import Flares from '~/components/Flares.vue'
+import { useFlareStore } from '~/stores/FlareStore'
+import { reactive } from 'vue'
+import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
+import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
 
 const settings = reactive({
   position: FlarePositionEnum.TOP_RIGHT,
   animation: FlareAnimationEnum.FADE_IN,
   borderRadius: false,
   backdropFilterBlur: false,
-  title: "Title",
-  message: "Message",
+  title: 'Title',
+  message: 'Message',
   duration: 5000
 })
 

@@ -1,12 +1,12 @@
-import { defineStore } from "pinia"
-import { ref } from "vue"
-import { FlareStoreInterface } from "~/interfaces/FlareStoreInterface"
-import { FlareTypeEnum } from "~/enums/FlareTypeEnum"
-import { FlareInterface } from "~/interfaces/FlareInterface"
-import { ShowInput } from "~/interfaces/ShowInterface";
-import { FlareSettingsInterface } from "~/interfaces/FlareSettingsInterface";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { FlareStoreInterface } from '~/interfaces/FlareStoreInterface'
+import { FlareTypeEnum } from '~/enums/FlareTypeEnum'
+import { FlareInterface } from '~/interfaces/FlareInterface'
+import { ShowInput } from '~/interfaces/ShowInterface'
+import { FlareSettingsInterface } from '~/interfaces/FlareSettingsInterface'
 
-export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface => {
+export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface => {
   const settings = ref<FlareSettingsInterface>({
     duration: 5000
   })
@@ -17,40 +17,40 @@ export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface =
 
   const flares = ref<FlareInterface[]>([
     {
-      id: "1",
-      title: "Success",
-      message: "",
+      id: '1',
+      title: 'Success',
+      message: '',
       type: FlareTypeEnum.SUCCESS,
       duration: 5000
     },
     {
-      id: "2",
-      title: "Info",
-      message: "Message",
+      id: '2',
+      title: 'Info',
+      message: 'Message',
       type: FlareTypeEnum.INFO,
       duration: 5000
     },
     {
-      id: "3",
-      title: "Error",
-      message: "Message",
+      id: '3',
+      title: 'Error',
+      message: 'Message',
       type: FlareTypeEnum.ERROR,
       duration: 5000
     },
     {
-      id: "4",
-      title: "Warning",
-      message: "Message",
+      id: '4',
+      title: 'Warning',
+      message: 'Message',
       type: FlareTypeEnum.WARNING,
       duration: 5000
     }
   ])
 
   function show ({
-        id = self.crypto.randomUUID(),
-        title, message = "",
-        type,
-        duration = settings.value.duration
+    id = self.crypto.randomUUID(),
+    title, message = '',
+    type,
+    duration = settings.value.duration
   }: ShowInput) {
     flares.value.push({ id, title, message, type, duration })
 

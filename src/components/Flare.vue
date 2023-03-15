@@ -2,31 +2,37 @@
   <div :class="flareClasses">
     <span
       class="flare__loading"
-      :style="{ animationDuration: props.duration + 'ms' }"
+      :style="{ animationDuration: `${props.duration}ms` }"
     />
     <svg class="flare__icon">
-      <use :xlink:href="`/icons.svg#${iconIdentifier}`" />
+      <use :xlink:href="`./icons.svg#${iconIdentifier}`" />
     </svg>
     <div class="flare__title">
       {{ title }}
     </div>
-    <div v-if="message" class="flare__message">
+    <div
+      v-if="message"
+      class="flare__message"
+    >
       {{ message }}
     </div>
-    <button class="flare__close" @click="emit('close')">
+    <button
+      class="flare__close"
+      @click="emit('close')"
+    >
       <svg>
-        <use :xlink:href="`/icons.svg#close`" />
+        <use :xlink:href="`./icons.svg#close`" />
       </svg>
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from "vue"
-import { FlareTypeEnum } from "~/enums/FlareTypeEnum"
-import { FlareAnimationEnum } from "~/enums/FlareAnimationEnum";
+import { computed, PropType } from 'vue'
+import { FlareTypeEnum } from '~/enums/FlareTypeEnum'
+import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 
-const emit = defineEmits(["close"])
+const emit = defineEmits(['close'])
 
 const props = defineProps({
   type: {
@@ -47,7 +53,7 @@ const props = defineProps({
   },
   message: {
     type: String,
-    default: ""
+    default: ''
   },
   duration: {
     type: Number,
@@ -77,15 +83,15 @@ const props = defineProps({
 })
 
 const iconMap = {
-  [FlareTypeEnum.SUCCESS]: "check",
-  [FlareTypeEnum.INFO]: "info",
-  [FlareTypeEnum.WARNING]: "error",
-  [FlareTypeEnum.ERROR]: "error",
-};
+  [FlareTypeEnum.SUCCESS]: 'check',
+  [FlareTypeEnum.INFO]: 'info',
+  [FlareTypeEnum.WARNING]: 'error',
+  [FlareTypeEnum.ERROR]: 'error',
+}
 
 const iconIdentifier = computed(() => {
-  return iconMap[props.type] || "info";
-});
+  return iconMap[props.type] || 'info'
+})
 
 const flareClasses = computed(() => [
   'flare', `flare--animation-${props.animation}`,
