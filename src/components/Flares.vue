@@ -1,6 +1,8 @@
 <template>
   <div :class="flaresClasses">
+    <slot v-if="$slots.default" />
     <Flare
+        v-else
         v-for="{ id, type, title, message } of flareStore.flares"
         :key="`flare-${id}`"
         :type="type"
@@ -8,6 +10,7 @@
         :message="message"
         :animation="animation"
         :border-radius="borderRadius"
+        :backdrop-filter-blur="backdropFilterBlur"
         @close="flareStore.hide(id)"
     />
   </div>
@@ -47,6 +50,10 @@ const props = defineProps({
     }
   },
   borderRadius: {
+    type: Boolean,
+    default: false
+  },
+  backdropFilterBlur: {
     type: Boolean,
     default: false
   },

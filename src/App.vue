@@ -1,9 +1,10 @@
 <template>
-    <Flares
-        :position="settings.position"
-        :animation="settings.animation"
-        :border-radius="settings.borderRadius"
-    />
+  <Flares
+      :position="settings.position"
+      :animation="settings.animation"
+      :border-radius="settings.borderRadius"
+      :backdrop-filter-blur="settings.backdropFilterBlur"
+  />
   <div class="vue-flare">
     <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     <h1>VueFlare</h1>
@@ -28,11 +29,14 @@
         <input v-model="settings.borderRadius" type="checkbox" name="border-radius">
         Border radius
       </label>
+      <label>
+        <input v-model="settings.backdropFilterBlur" type="checkbox" name="backdrop-filter-blur">
+        Backdrop filter blur
+      </label>
     </fieldset>
-
     <fieldset>
       <h3>Animation</h3>
-      <label v-for="animation of FlareAnimationEnum" :key="`position-${animation}`">
+      <label v-for="animation of FlareAnimationEnum" :key="`animation-${animation}`">
         <input v-model="settings.animation" type="radio" name="position" :value="animation">
         {{ animation }}
       </label>
@@ -64,6 +68,7 @@ const settings = reactive({
   position: FlarePositionEnum.TOP_RIGHT,
   animation: FlareAnimationEnum.FADE_IN,
   borderRadius: false,
+  backdropFilterBlur: false,
   title: "Title",
   message: "Message",
   duration: 5000
@@ -92,7 +97,6 @@ watch(() => settings.duration, (value, oldValue) => {
     flareStore.setSettings({ duration: settings.duration })
   }
 }, { immediate: true })
-
 </script>
 
 <style scoped lang="scss">

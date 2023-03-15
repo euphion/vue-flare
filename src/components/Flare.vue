@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, PropType} from "vue"
+import { computed, PropType } from "vue"
 import { FlareTypeEnum } from "~/enums/FlareTypeEnum"
 import { FlareAnimationEnum } from "~/enums/FlareAnimationEnum";
 
@@ -46,6 +46,10 @@ const props = defineProps({
     default: ""
   },
   borderRadius: {
+    type: Boolean,
+    default: false
+  },
+  backdropFilterBlur: {
     type: Boolean,
     default: false
   },
@@ -83,6 +87,7 @@ const flareClasses = computed(() => [
     'flare--warning': props.type === FlareTypeEnum.WARNING,
     'flare--error': props.type === FlareTypeEnum.ERROR,
     'flare--border-radius': props.borderRadius,
+    'flare--backdrop-filter-blur': props.backdropFilterBlur,
   }
 ])
 </script>
@@ -93,7 +98,6 @@ const flareClasses = computed(() => [
   display: flex;
   justify-content: space-between;
   padding: 20px 35px 20px 80px;
-  backdrop-filter: blur(10px);
   position: relative;
   flex-direction: column;
   align-items: flex-start;
@@ -101,6 +105,10 @@ const flareClasses = computed(() => [
 
   &--border-radius {
     border-radius: 10px;
+  }
+
+  &--backdrop-filter-blur {
+    backdrop-filter: blur(10px);
   }
 
   &--animation-fade-in {
@@ -163,7 +171,11 @@ const flareClasses = computed(() => [
   &--success {
     // light - #1fa55a
     // dark - #0e5f38
-    background-color: rgba(31, 166, 90, 0.8);
+    background-color: rgba(31, 166, 90, 1);
+
+    &.flare--backdrop-filter-blur {
+      background-color: rgba(31, 166, 90, 0.8);
+    }
 
     .flare__icon, .flare__close {
       color: #0e5f38;
@@ -173,7 +185,11 @@ const flareClasses = computed(() => [
   &--info {
     // light - #1f6fe0
     // dark - #10488a
-    background-color: rgba(31, 112, 224, 0.8);
+    background-color: rgba(31, 112, 224, 1);
+
+    &.flare--backdrop-filter-blur {
+      background-color: rgba(31, 112, 224, 0.8);
+    }
 
     .flare__icon, .flare__close {
       color: #10488a;
@@ -183,7 +199,11 @@ const flareClasses = computed(() => [
   &--warning {
     // light - #ee8d31
     // dark - #c34916
-    background-color: rgba(237, 140, 50, 0.8);
+    background-color: rgba(237, 140, 50, 1);
+
+    &.flare--backdrop-filter-blur {
+      background-color: rgba(237, 140, 50, 0.8);
+    }
 
     .flare__icon, .flare__close {
       color: #c34916;

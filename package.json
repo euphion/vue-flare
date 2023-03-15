@@ -1,8 +1,9 @@
 {
   "name": "vue-flare",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
+  "author": "Jakub Dvorak (https://www.linkedin.com/in/jakubdvorakone)",
   "type": "module",
   "files": [
     "dist"
