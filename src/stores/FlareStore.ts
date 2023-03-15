@@ -5,10 +5,18 @@ import { FlareTypeEnum } from '~/enums/FlareTypeEnum'
 import { FlareInterface } from '~/interfaces/FlareInterface'
 import { ShowInput } from '~/interfaces/ShowInterface'
 import { FlareSettingsInterface } from '~/interfaces/FlareSettingsInterface'
+import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
+import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 
 export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface => {
   const settings = ref<FlareSettingsInterface>({
-    duration: 5000
+    position: FlarePositionEnum.TOP_RIGHT,
+    animation: FlareAnimationEnum.FADE_IN,
+    borderRadius: false,
+    backdropFilterBlur: false,
+    duration: 5000,
+    maxWidth: 400,
+    iconsPath: './icons.svg'
   })
 
   function setSettings(newSettings: FlareSettingsInterface) {
@@ -50,7 +58,7 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
     id = self.crypto.randomUUID(),
     title, message = '',
     type,
-    duration = settings.value.duration
+    duration = settings.value.duration!
   }: ShowInput) {
     flares.value.push({ id, title, message, type, duration })
 

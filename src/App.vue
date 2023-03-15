@@ -1,11 +1,5 @@
 <template>
-  <Flares
-    :position="settings.position"
-    :animation="settings.animation"
-    :border-radius="settings.borderRadius"
-    :backdrop-filter-blur="settings.backdropFilterBlur"
-    :max-width="300"
-  />
+  <Flares />
   <div class="vue-flare">
     <img
       src="./assets/vue.svg"
@@ -123,7 +117,7 @@
 <script setup lang="ts">
 import Flares from '~/components/Flares.vue'
 import { useFlareStore } from '~/stores/FlareStore'
-import { reactive } from 'vue'
+import {reactive, watchEffect} from 'vue'
 import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
 
@@ -134,6 +128,7 @@ const settings = reactive({
   backdropFilterBlur: false,
   title: 'Title',
   message: 'Message',
+  maxWidth: 400,
   duration: 5000
 })
 
@@ -170,6 +165,10 @@ function warning () {
     duration: settings.duration
   })
 }
+
+watchEffect(() => {
+  flareStore.setSettings(settings)
+})
 </script>
 
 <style scoped lang="scss">
