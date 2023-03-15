@@ -5,7 +5,7 @@
       :style="{ animationDuration: `${props.duration}ms` }"
     />
     <svg class="flare__icon">
-      <use :xlink:href="`./icons.svg#${iconIdentifier}`" />
+      <use :xlink:href="`${iconsPath}#${iconIdentifier}`" />
     </svg>
     <div class="flare__title">
       {{ title }}
@@ -21,7 +21,7 @@
       @click="emit('close')"
     >
       <svg>
-        <use :xlink:href="`./icons.svg#close`" />
+        <use :xlink:href="`${iconsPath}#flare-close`" />
       </svg>
     </button>
   </div>
@@ -47,6 +47,19 @@ const props = defineProps({
       ].includes(value)
     }
   },
+  animation: {
+    type: String as PropType<FlareAnimationEnum>,
+    default: FlareAnimationEnum.FADE_IN,
+    validator(value: FlareAnimationEnum) {
+      return [
+        FlareAnimationEnum.FADE_IN,
+        FlareAnimationEnum.FADE_TOP,
+        FlareAnimationEnum.FADE_RIGHT,
+        FlareAnimationEnum.FADE_BOTTOM,
+        FlareAnimationEnum.FADE_LEFT
+      ].includes(value)
+    }
+  },
   title: {
     type: String,
     required: true
@@ -67,26 +80,17 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  animation: {
-    type: String as PropType<FlareAnimationEnum>,
-    default: FlareAnimationEnum.FADE_IN,
-    validator(value: FlareAnimationEnum) {
-      return [
-        FlareAnimationEnum.FADE_IN,
-        FlareAnimationEnum.FADE_TOP,
-        FlareAnimationEnum.FADE_RIGHT,
-        FlareAnimationEnum.FADE_BOTTOM,
-        FlareAnimationEnum.FADE_LEFT
-      ].includes(value)
-    }
+  iconsPath: {
+    type: String,
+    default: './icons.svg'
   },
 })
 
 const iconMap = {
-  [FlareTypeEnum.SUCCESS]: 'check',
-  [FlareTypeEnum.INFO]: 'info',
-  [FlareTypeEnum.WARNING]: 'error',
-  [FlareTypeEnum.ERROR]: 'error',
+  [FlareTypeEnum.SUCCESS]: 'flare-success',
+  [FlareTypeEnum.INFO]: 'flare-info',
+  [FlareTypeEnum.WARNING]: 'flare-warning',
+  [FlareTypeEnum.ERROR]: 'flare-error',
 }
 
 const iconIdentifier = computed(() => {

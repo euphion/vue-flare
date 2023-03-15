@@ -4,6 +4,7 @@
     :animation="settings.animation"
     :border-radius="settings.borderRadius"
     :backdrop-filter-blur="settings.backdropFilterBlur"
+    :max-width="300"
   />
   <div class="vue-flare">
     <img

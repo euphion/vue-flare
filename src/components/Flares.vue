@@ -1,5 +1,8 @@
 <template>
-  <div :class="flaresClasses">
+  <div
+    :class="flaresClasses"
+    :style="{ maxWidth: `${props.maxWidth}px` }"
+  >
     <slot v-if="$slots.default" />
     <Flare
       v-for="{ id, type, title, message, duration } of flareStore.flares"
@@ -12,6 +15,7 @@
       :animation="animation"
       :border-radius="borderRadius"
       :backdrop-filter-blur="backdropFilterBlur"
+      :icons-path="iconsPath"
       @close="flareStore.hide(id)"
     />
   </div>
@@ -57,6 +61,14 @@ const props = defineProps({
   backdropFilterBlur: {
     type: Boolean,
     default: false
+  },
+  maxWidth: {
+    type: Number,
+    default: 400
+  },
+  iconsPath: {
+    type: String,
+    default: './icons.svg'
   },
 })
 
