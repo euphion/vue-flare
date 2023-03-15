@@ -1,3 +1,3 @@
 export interface FlareSettingsInterface {
-  duration?: number
+  duration: number
 }

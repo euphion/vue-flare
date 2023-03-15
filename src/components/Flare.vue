@@ -1,5 +1,9 @@
 <template>
   <div :class="flareClasses">
+    <span
+      class="flare__loading"
+      :style="{ animationDuration: props.duration + 'ms' }"
+    />
     <svg class="flare__icon">
       <use :xlink:href="`/icons.svg#${iconIdentifier}`" />
     </svg>
@@ -44,6 +48,10 @@ const props = defineProps({
   message: {
     type: String,
     default: ""
+  },
+  duration: {
+    type: Number,
+    required: true
   },
   borderRadius: {
     type: Boolean,
@@ -102,6 +110,7 @@ const flareClasses = computed(() => [
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  overflow: hidden;
 
   &--border-radius {
     border-radius: 10px;
@@ -129,6 +138,15 @@ const flareClasses = computed(() => [
 
   &--animation-fade-left {
     animation: fadeLeft ease .5s;
+  }
+
+  &__loading {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    animation: loading linear;
   }
 
   &__icon {
@@ -180,6 +198,10 @@ const flareClasses = computed(() => [
     .flare__icon, .flare__close {
       color: #0e5f38;
     }
+
+    .flare__loading {
+      background-color: #0e5f38;
+    }
   }
 
   &--info {
@@ -193,6 +215,10 @@ const flareClasses = computed(() => [
 
     .flare__icon, .flare__close {
       color: #10488a;
+    }
+
+    .flare__loading {
+      background-color: #10488a;
     }
   }
 
@@ -208,15 +234,27 @@ const flareClasses = computed(() => [
     .flare__icon, .flare__close {
       color: #c34916;
     }
+
+    .flare__loading {
+      background-color: #c34916;
+    }
   }
 
   &--error {
     // light - #dc3055
     // dark - #851d41
-    background-color: rgba(219, 48, 85, 0.8);
+    background-color: rgba(219, 48, 85, 1);
+
+    &.flare--backdrop-filter-blur {
+      background-color: rgba(219, 48, 85, 0.8);
+    }
 
     .flare__icon, .flare__close {
       color: #851d41;
+    }
+
+    .flare__loading {
+      background-color: #851d41;
     }
   }
 
@@ -266,6 +304,15 @@ const flareClasses = computed(() => [
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes loading {
+    from {
+      width: 0;
+    }
+    to {
+      opacity: 100%;
     }
   }
 }

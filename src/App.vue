@@ -77,32 +77,46 @@ const settings = reactive({
 const flareStore = useFlareStore()
 
 function success () {
-  flareStore.success({ title: settings.title, message: settings.message })
+  flareStore.success({
+    title: settings.title,
+    message: settings.message,
+    duration: settings.duration
+  })
 }
 
 function info () {
-  flareStore.info({ title: settings.title, message: settings.message })
+  flareStore.info({
+    title: settings.title,
+    message: settings.message,
+    duration: settings.duration
+  })
 }
 
 function error () {
-  flareStore.error({ title: settings.title, message: settings.message })
+  flareStore.error({
+    title: settings.title,
+    message: settings.message,
+    duration: settings.duration
+  })
 }
 
 function warning () {
-  flareStore.warning({ title: settings.title, message: settings.message })
+  flareStore.warning({
+    title: settings.title,
+    message: settings.message,
+    duration: settings.duration
+  })
 }
-
-watch(() => settings.duration, (value, oldValue) => {
-  if (value !== oldValue) {
-    flareStore.setSettings({ duration: settings.duration })
-  }
-}, { immediate: true })
 </script>
 
 <style scoped lang="scss">
 .vue-flare {
   h1 {
     margin-top: 0;
+  }
+
+  h3 {
+    margin-top: 5px;
   }
 
   fieldset {

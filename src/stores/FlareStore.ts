@@ -20,25 +20,29 @@ export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface =
       id: "1",
       title: "Success",
       message: "",
-      type: FlareTypeEnum.SUCCESS
+      type: FlareTypeEnum.SUCCESS,
+      duration: 5000
     },
     {
       id: "2",
       title: "Info",
       message: "Message",
-      type: FlareTypeEnum.INFO
+      type: FlareTypeEnum.INFO,
+      duration: 5000
     },
     {
       id: "3",
       title: "Error",
       message: "Message",
-      type: FlareTypeEnum.ERROR
+      type: FlareTypeEnum.ERROR,
+      duration: 5000
     },
     {
       id: "4",
       title: "Warning",
       message: "Message",
-      type: FlareTypeEnum.WARNING
+      type: FlareTypeEnum.WARNING,
+      duration: 5000
     }
   ])
 
@@ -48,7 +52,7 @@ export const useFlareStore = defineStore("FlareStore", (): FlareStoreInterface =
         type,
         duration = settings.value.duration
   }: ShowInput) {
-    flares.value.push({ id, title, message, type })
+    flares.value.push({ id, title, message, type, duration })
 
     setTimeout(() => {
       hide(id)

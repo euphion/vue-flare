@@ -5,4 +5,5 @@ export interface FlareInterface {
   title: string
   message: string
   type: FlareTypeEnum
+  duration: number
 }

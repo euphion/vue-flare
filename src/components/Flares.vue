@@ -3,11 +3,12 @@
     <slot v-if="$slots.default" />
     <Flare
         v-else
-        v-for="{ id, type, title, message } of flareStore.flares"
+        v-for="{ id, type, title, message, duration } of flareStore.flares"
         :key="`flare-${id}`"
         :type="type"
         :title="title"
         :message="message"
+        :duration="duration"
         :animation="animation"
         :border-radius="borderRadius"
         :backdrop-filter-blur="backdropFilterBlur"
