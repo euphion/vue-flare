@@ -1,20 +1,12 @@
 <template>
   <Flares />
   <div class="vue-flare">
-    <img
-      src="./assets/vue.svg"
-      class="logo vue"
-      alt="Vue logo"
-    >
+    <img src="./assets/vue.svg" class="logo vue" alt="Vue logo">
     <h1>VueFlare</h1>
     <fieldset>
       <label>
         Title
-        <input
-          v-model="settings.title"
-          type="text"
-          name="title"
-        >
+        <input v-model="settings.title" type="text" name="title">
       </label>
     </fieldset>
     <fieldset>
@@ -39,32 +31,21 @@
     </fieldset>
     <fieldset>
       <label>
-        <input
-          v-model="settings.borderRadius"
-          type="checkbox"
-          name="border-radius"
-        >
+        <input v-model="settings.borderRadius" type="checkbox" name="border-radius">
         Border radius
       </label>
       <label>
-        <input
-          v-model="settings.backdropFilterBlur"
-          type="checkbox"
-          name="backdrop-filter-blur"
-        >
+        <input v-model="settings.backdropFilterBlur" type="checkbox" name="backdrop-filter-blur">
         Backdrop filter blur
       </label>
     </fieldset>
     <fieldset>
       <h3>Animation</h3>
-      <label
-        v-for="animation of FlareAnimationEnum"
-        :key="`animation-${animation}`"
-      >
+      <label v-for="animation of FlareAnimationEnum" :key="`animation-${animation}`">
         <input
           v-model="settings.animation"
           type="radio"
-          name="position"
+          name="animation"
           :value="animation"
         >
         {{ animation }}
@@ -72,10 +53,7 @@
     </fieldset>
     <fieldset>
       <h3>Position</h3>
-      <label
-        v-for="position of FlarePositionEnum"
-        :key="`position-${position}`"
-      >
+      <label v-for="position of FlarePositionEnum" :key="`position-${position}`">
         <input
           v-model="settings.position"
           type="radio"
@@ -86,28 +64,16 @@
       </label>
     </fieldset>
     <div class="actions">
-      <button
-        type="button"
-        @click="success"
-      >
+      <button type="button" @click="success">
         success
       </button>
-      <button
-        type="button"
-        @click="info"
-      >
+      <button type="button" @click="info">
         info
       </button>
-      <button
-        type="button"
-        @click="error"
-      >
+      <button type="button" @click="error">
         error
       </button>
-      <button
-        type="button"
-        @click="warning"
-      >
+      <button type="button" @click="warning">
         warning
       </button>
     </div>

@@ -1,25 +1,16 @@
 <template>
   <div :class="flareClasses">
-    <span
-      class="flare__loading"
-      :style="{ animationDuration: `${props.duration}ms` }"
-    />
+    <span class="flare__loading" :style="{ animationDuration: `${props.duration}ms` }" />
     <svg class="flare__icon">
       <use :xlink:href="`${iconsPath}#${iconIdentifier}`" />
     </svg>
     <div class="flare__title">
       {{ title }}
     </div>
-    <div
-      v-if="message"
-      class="flare__message"
-    >
+    <div v-if="message" class="flare__message">
       {{ message }}
     </div>
-    <button
-      class="flare__close"
-      @click="emit('close')"
-    >
+    <button class="flare__close" @click="emit('close')">
       <svg>
         <use :xlink:href="`${iconsPath}#flare-close`" />
       </svg>
