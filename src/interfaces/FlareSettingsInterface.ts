@@ -1,12 +1,11 @@
-import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
-import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
+import { FlarePositionType } from '~/types/FlarePositionType'
+import { FlareAnimationType } from '~/types/FlareAnimationType'
 
 export interface FlareSettingsInterface {
-  position?: FlarePositionEnum;
-  animation?: FlareAnimationEnum
-  borderRadius?: Boolean
-  backdropFilterBlur?: Boolean,
+  position?: FlarePositionType;
+  animation?: FlareAnimationType
+  borderRadius?: boolean
+  backdropFilterBlur?: boolean,
   duration?: number,
-  maxWidth?: number,
-  iconsPath?: string
+  maxWidth?: string,
 }

@@ -7,7 +7,6 @@ export interface FlareStoreInterface {
   settings: Ref<FlareSettingsInterface>
   setSettings (newSettings: FlareSettingsInterface): void
   flares: Ref<FlareInterface[]>
-  show (input: ShowInput): void
   hide (id: string): void
   success (input: Omit<ShowInput, 'type'>): void
   info (input: Omit<ShowInput, 'type'>): void

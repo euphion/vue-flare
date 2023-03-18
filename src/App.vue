@@ -94,8 +94,8 @@ const settings = reactive({
   backdropFilterBlur: false,
   title: 'Title',
   message: 'Message',
-  maxWidth: 400,
-  duration: 5000
+  maxWidth: '400px',
+  duration: 5000,
 })
 
 const flareStore = useFlareStore()
@@ -112,7 +112,7 @@ function info () {
   flareStore.info({
     title: settings.title,
     message: settings.message,
-    duration: settings.duration
+    duration: settings.duration,
   })
 }
 

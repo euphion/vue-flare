@@ -1,7 +1,7 @@
 <template>
   <div
     :class="flaresClasses"
-    :style="{ maxWidth: `${flareStore.settings.maxWidth}px` }"
+    :style="{ maxWidth: flareStore.settings.maxWidth }"
   >
     <slot v-if="$slots.default" />
     <Flare
@@ -15,7 +15,6 @@
       :animation="flareStore.settings.animation"
       :border-radius="flareStore.settings.borderRadius"
       :backdrop-filter-blur="flareStore.settings.backdropFilterBlur"
-      :icons-path="flareStore.settings.iconsPath"
       @close="flareStore.hide(id)"
     />
   </div>
@@ -32,10 +31,10 @@ const flareStore = useFlareStore()
 const flaresClasses = computed(() => [
   'flares',
   {
-    'flares--top-left': flareStore.settings.position === FlarePositionEnum.TOP_LEFT,
-    'flares--top-right': flareStore.settings.position === FlarePositionEnum.TOP_RIGHT,
-    'flares--bottom-left': flareStore.settings.position === FlarePositionEnum.BOTTOM_LEFT,
-    'flares--bottom-right': flareStore.settings.position === FlarePositionEnum.BOTTOM_RIGHT,
+    'flares-top-left': flareStore.settings.position === FlarePositionEnum.TOP_LEFT,
+    'flares-top-right': flareStore.settings.position === FlarePositionEnum.TOP_RIGHT,
+    'flares-bottom-left': flareStore.settings.position === FlarePositionEnum.BOTTOM_LEFT,
+    'flares-bottom-right': flareStore.settings.position === FlarePositionEnum.BOTTOM_RIGHT,
   }
 ])
 </script>
@@ -50,22 +49,22 @@ const flaresClasses = computed(() => [
   gap: 10px;
   flex-direction: column;
 
-  &--top-left {
+  &-top-left {
     top: 30px;
     left: 10px;
   }
 
-  &--top-right {
+  &-top-right {
     top: 30px;
     right: 10px;
   }
 
-  &--bottom-left {
+  &-bottom-left {
     bottom: 30px;
     left: 10px;
   }
 
-  &--bottom-right {
+  &-bottom-right {
     bottom: 30px;
     right: 10px;
   }

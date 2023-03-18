@@ -15,8 +15,7 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
     borderRadius: false,
     backdropFilterBlur: false,
     duration: 5000,
-    maxWidth: 400,
-    iconsPath: './icons.svg'
+    maxWidth: '400px',
   })
 
   function setSettings(newSettings: FlareSettingsInterface) {
@@ -56,7 +55,8 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
 
   function show ({
     id = self.crypto.randomUUID(),
-    title, message = '',
+    title,
+    message = '',
     type,
     duration = settings.value.duration!
   }: ShowInput) {
@@ -87,5 +87,5 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
     show({...input, type: FlareTypeEnum.WARNING })
   }
 
-  return { settings, setSettings, flares, show, hide, success, info, error, warning }
+  return { settings, setSettings, flares, hide, success, info, error, warning }
 })

@@ -1,7 +1,7 @@
 {
   "name": "vue-flare",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "author": "Jakub Dvorak (https://www.linkedin.com/in/jakubdvorakone)",
   "type": "module",
@@ -14,7 +14,9 @@
     ".": {
       "require": "./dist/vue-flare.umd.js",
       "import": "./dist/vue-flare.es.js"
-    }
+    },
+    "./dist/style.css": "./dist/style.css",
+    "./dist/icons.svg": "./dist/icons.svg"
   },
   "types": "./dist/index.d.ts",
   "scripts": {

@@ -1,8 +1,8 @@
-import path from "path"
+import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import dts from "vite-plugin-dts"
-import eslint from 'vite-plugin-eslint';
+import dts from 'vite-plugin-dts'
+import eslint from 'vite-plugin-eslint'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +15,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['vue'],
       output: {
+        exports: 'named',
         globals: {
           vue: 'Vue',
         },
@@ -24,7 +25,7 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({ insertTypesEntry: true }),
-    eslint()
+    eslint(),
   ],
   resolve: {
     alias: {
