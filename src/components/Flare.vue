@@ -60,12 +60,13 @@ import { computed, PropType } from 'vue'
 import { FlareTypeEnum } from '~/enums/FlareTypeEnum'
 import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 import { FlareAnimationType } from '~/types/FlareAnimationType'
+import { FlareTypeType } from '~/types/FlareTypeType'
 
 const emit = defineEmits(['close'])
 
 const props = defineProps({
   type: {
-    type: String as PropType<FlareTypeEnum>,
+    type: String as PropType<FlareTypeType>,
     required: true,
     validator(value: FlareTypeEnum) {
       return [
@@ -153,7 +154,7 @@ const flareClasses = computed(() => [
   }
 
   &-animation-fade-right {
-    animation: fadeRight ease .5s;
+    animation: fadeRight ease .25s;
   }
 
   &-animation-fade-bottom {

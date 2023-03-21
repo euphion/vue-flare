@@ -60,7 +60,7 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
     type,
     duration = settings.value.duration!
   }: ShowInput) {
-    flares.value.push({ id, title, message, type, duration })
+    flares.value.unshift({ id, title, message, type, duration })
 
     setTimeout(() => {
       hide(id)

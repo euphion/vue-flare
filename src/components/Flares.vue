@@ -33,8 +33,10 @@ const flaresClasses = computed(() => [
   {
     'flares-top-left': flareStore.settings.position === FlarePositionEnum.TOP_LEFT,
     'flares-top-right': flareStore.settings.position === FlarePositionEnum.TOP_RIGHT,
+    'flares-top-center': flareStore.settings.position === FlarePositionEnum.TOP_CENTER,
     'flares-bottom-left': flareStore.settings.position === FlarePositionEnum.BOTTOM_LEFT,
     'flares-bottom-right': flareStore.settings.position === FlarePositionEnum.BOTTOM_RIGHT,
+    'flares-bottom-center': flareStore.settings.position === FlarePositionEnum.BOTTOM_CENTER,
   }
 ])
 </script>
@@ -59,6 +61,12 @@ const flaresClasses = computed(() => [
     right: 10px;
   }
 
+  &-top-center {
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   &-bottom-left {
     bottom: 30px;
     left: 10px;
@@ -67,6 +75,12 @@ const flaresClasses = computed(() => [
   &-bottom-right {
     bottom: 30px;
     right: 10px;
+  }
+
+  &-bottom-center {
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>

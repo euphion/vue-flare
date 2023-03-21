@@ -1,1 +1,7 @@
-export type FlarePositionType = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+export type FlarePositionType =
+    'top-left'
+    | 'top-right'
+    | 'top-center'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'bottom-center'

@@ -108,7 +108,7 @@ show
 </button>
 ```
 
-## Customisation
+## Customization
 
 You can use custom component for notifications inside the `<Flares />` component
 
@@ -143,8 +143,10 @@ You can use custom component for notifications inside the `<Flares />` component
 .flares {
   &-top-left {}
   &-top-right {}
+  &-top-center {}
   &-bottom-left {}
   &-bottom-right {}
+  &-bottom-center {}
 }
 
 .flare {
