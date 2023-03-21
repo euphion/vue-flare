@@ -24,48 +24,7 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
     settings.value = { ...settings.value, ...newSettings }
   }
 
-  const flares = ref<FlareInterface[]>([
-    {
-      id: '1',
-      title: 'Success',
-      message: '',
-      type: FlareTypeEnum.SUCCESS,
-      duration: 5000,
-      closable: true,
-      hasIcon: true,
-      hasLoading: true
-    },
-    {
-      id: '2',
-      title: 'Info',
-      message: 'Message',
-      type: FlareTypeEnum.INFO,
-      duration: 5000,
-      closable: true,
-      hasIcon: true,
-      hasLoading: true
-    },
-    {
-      id: '3',
-      title: 'Error',
-      message: 'Message',
-      type: FlareTypeEnum.ERROR,
-      duration: 5000,
-      closable: true,
-      hasIcon: true,
-      hasLoading: true
-    },
-    {
-      id: '4',
-      title: 'Warning',
-      message: 'Message',
-      type: FlareTypeEnum.WARNING,
-      duration: 5000,
-      closable: true,
-      hasIcon: true,
-      hasLoading: true
-    }
-  ])
+  const flares = ref<FlareInterface[]>([])
 
   function show ({
     id = self.crypto.randomUUID(),

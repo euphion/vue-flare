@@ -37,7 +37,21 @@ createApp(App).use(VueFlare, {
 ## Setup with Nuxt 3
 
 ```javascript
-// TODO
+// plugins/vue-flare.ts
+
+import VueFlare from "vue-flare"
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(VueFlare)
+})
+```
+
+```javascript
+// nuxt.config.ts
+
+export default defineNuxtConfig({
+  css: ["~/node_modules/vue-flare/dist/style.css"]
+})
 ```
 
 ## Usage
