@@ -2,6 +2,8 @@
 
 **The goal was to create simple, easy to set up notifications for Vue 3 in a beautiful design that no app or website would be ashamed of.**
 
+**Check out the demo [vue-flare.web.app](https://vue-flare.web.app)**
+
 >  **Note**: Plugin uses **Pinia** store management
 
 ## Installation
