@@ -6,4 +6,7 @@ export interface FlareInterface {
   message: string
   type: FlareTypeEnum
   duration: number
+  closable: boolean
+  hasIcon: boolean
+  hasLoading: boolean
 }

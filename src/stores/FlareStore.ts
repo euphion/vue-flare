@@ -16,6 +16,8 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
     backdropFilterBlur: false,
     duration: 5000,
     maxWidth: '400px',
+    displayFromTop: true,
+    duplicationEnabled: true,
   })
 
   function setSettings(newSettings: FlareSettingsInterface) {
@@ -28,28 +30,40 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
       title: 'Success',
       message: '',
       type: FlareTypeEnum.SUCCESS,
-      duration: 5000
+      duration: 5000,
+      closable: true,
+      hasIcon: true,
+      hasLoading: true
     },
     {
       id: '2',
       title: 'Info',
       message: 'Message',
       type: FlareTypeEnum.INFO,
-      duration: 5000
+      duration: 5000,
+      closable: true,
+      hasIcon: true,
+      hasLoading: true
     },
     {
       id: '3',
       title: 'Error',
       message: 'Message',
       type: FlareTypeEnum.ERROR,
-      duration: 5000
+      duration: 5000,
+      closable: true,
+      hasIcon: true,
+      hasLoading: true
     },
     {
       id: '4',
       title: 'Warning',
       message: 'Message',
       type: FlareTypeEnum.WARNING,
-      duration: 5000
+      duration: 5000,
+      closable: true,
+      hasIcon: true,
+      hasLoading: true
     }
   ])
 
@@ -58,9 +72,20 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
     title,
     message = '',
     type,
-    duration = settings.value.duration!
+    duration = settings.value.duration!,
+    closable = true,
+    hasIcon = true,
+    hasLoading = true,
   }: ShowInput) {
-    flares.value.unshift({ id, title, message, type, duration })
+    if (!settings.value.duplicationEnabled) {
+      flares.value = flares.value.filter(flare => flare.type !== type)
+    }
+
+    if (settings.value.displayFromTop) {
+      flares.value.unshift({ id, title, message, type, duration, closable, hasIcon, hasLoading })
+    } else {
+      flares.value.push({ id, title, message, type, duration, closable, hasIcon, hasLoading })
+    }
 
     setTimeout(() => {
       hide(id)

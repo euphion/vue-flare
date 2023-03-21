@@ -31,6 +31,26 @@
     </fieldset>
     <fieldset>
       <label>
+        <input v-model="settings.displayFromTop" type="checkbox" name="display-from-top">
+        Display from top
+      </label>
+      <label>
+        <input v-model="settings.duplicationEnabled" type="checkbox" name="duplication-enabled">
+        Duplication enabled
+      </label>
+      <label>
+        <input v-model="settings.hasIcon" type="checkbox" name="has-icon">
+        Has icon
+      </label>
+      <label>
+        <input v-model="settings.hasLoading" type="checkbox" name="has-loading">
+        Has loading
+      </label>
+      <label>
+        <input v-model="settings.closable" type="checkbox" name="closable">
+        Closable
+      </label>
+      <label>
         <input v-model="settings.borderRadius" type="checkbox" name="border-radius">
         Border radius
       </label>
@@ -94,8 +114,13 @@ const settings = reactive({
   backdropFilterBlur: false,
   title: 'Title',
   message: 'Message',
-  maxWidth: '400px',
   duration: 5000,
+  closable: true,
+  hasIcon: true,
+  hasLoading: true,
+  maxWidth: '400px',
+  duplicationEnabled: true,
+  displayFromTop: true
 })
 
 const flareStore = useFlareStore()
@@ -104,7 +129,10 @@ function success () {
   flareStore.success({
     title: settings.title,
     message: settings.message,
-    duration: settings.duration
+    duration: settings.duration,
+    closable: settings.closable,
+    hasIcon: settings.hasIcon,
+    hasLoading: settings.hasLoading,
   })
 }
 
@@ -113,6 +141,8 @@ function info () {
     title: settings.title,
     message: settings.message,
     duration: settings.duration,
+    hasIcon: settings.hasIcon,
+    hasLoading: settings.hasLoading,
   })
 }
 
@@ -120,7 +150,9 @@ function error () {
   flareStore.error({
     title: settings.title,
     message: settings.message,
-    duration: settings.duration
+    duration: settings.duration,
+    hasIcon: settings.hasIcon,
+    hasLoading: settings.hasLoading,
   })
 }
 
@@ -128,7 +160,9 @@ function warning () {
   flareStore.warning({
     title: settings.title,
     message: settings.message,
-    duration: settings.duration
+    duration: settings.duration,
+    hasIcon: settings.hasIcon,
+    hasLoading: settings.hasLoading,
   })
 }
 

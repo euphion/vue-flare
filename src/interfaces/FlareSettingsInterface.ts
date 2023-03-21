@@ -8,4 +8,6 @@ export interface FlareSettingsInterface {
   backdropFilterBlur?: boolean,
   duration?: number,
   maxWidth?: string,
+  displayFromTop?: boolean,
+  duplicationEnabled?: boolean
 }
