@@ -148,7 +148,7 @@ const flareClasses = computed(() => [
 ])
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .flare {
   color: #ffffff;
   display: flex;

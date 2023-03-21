@@ -44,7 +44,7 @@ const flaresClasses = computed(() => [
 ])
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .flares {
   position: fixed;
   width: 100%;
