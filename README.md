@@ -28,20 +28,17 @@ createApp(App).use(VueFlare, {
   borderRadius: false,
   backdropFilterBlur: false,
   duration: 5000,
-  maxWidth: '400px'
+  maxWidth: '400px',
+  displayFromTop: true,
+  duplicationEnabled: true,
 }).mount('#app')
 ```
 
-or with yarn
+## Setup with Nuxt 3
 
-```bash
-yarn add vue-flare
+```javascript
+// TODO
 ```
-
-```bash
-yarn add vue-flare
-```
-
 
 ## Usage
 
@@ -68,16 +65,29 @@ yarn add vue-flare
 import { computed, inject } from "vue";
 import { Flares, FlareStoreInterface } from "vue-flare"
 
+// Access to the plugin
 const flare = inject('flare') as FlareStoreInterface
 
 const activeFlares = computed(() => flare.flares)
 const activeSettings = computed(() => flare.settings)
 
 function show () {
+    // Examples
     flare.success({ title: "Success" })
     flare.info({ title: "Info", message: "Message" })
     flare.warning({ title: "Info", message: "Message", duration: 10000 })
     flare.error({ id: '78dd0a2b', title: "Info", message: "Message" })
+
+    // All the settings
+    flare.info({
+        id: '78dd0a2c',  
+        title: "Info", 
+        message: "Message",
+        duration: 20000,
+        hasIcon: false,
+        hasLoading: false,
+        closable: false
+    })
 }
 
 function hide () {
@@ -91,7 +101,9 @@ function setNewSettings () {
         borderRadius: true,
         backdropFilterBlur: true,
         duration: 3000,
-        maxWidth: '600px'
+        maxWidth: '600px',
+        displayFromTop: false,
+        duplicationEnabled: false
     })
 }
 ```
@@ -119,12 +131,15 @@ You can use custom component for notifications inside the `<Flares />` component
   <div>
     <Flares>
       <Flare
-          v-for="{ id, type, title, message, duration } of flare.flares"
+          v-for="{ id, type, title, message, duration, hasIcon, hasLoading, closable } of flare.flares"
           :key="`flare-${id}`"
           :type="type"
           :title="title"
           :message="message"
           :duration="duration"
+          :has-icon="hasIcon"
+          :has-loading="hasLoading"
+          :closable="closable"
           animation="fade-in"
           border-radius
           backdrop-filter-blur
@@ -152,6 +167,7 @@ You can use custom component for notifications inside the `<Flares />` component
 .flare {
   &-border-radius {}
   &-backdrop-filter-blur {}
+  &-has-icon {}
   
   &-animation-fade-in {}
   &-animation-fade-top {}
@@ -207,46 +223,56 @@ You can use custom component for notifications inside the `<Flares />` component
 ### `<Flare />`
 ```vue
 <Flare
-    :type="type"
-    :title="title"
-    :message="message"
-    :duration="duration"
+    type="success"
+    title="Title"
+    message="Message"
     animation="fade-in"
-    border-radius
-    backdrop-filter-blur
+    border-radius="false"
+    backdrop-filter-blur="false"
+    has-icon
+    has-loading
+    closable
+    :duration="5000"
 />
 ```
 
-| Name           | Description                     | Type    | Values                                                    | Default |
-|----------------|---------------------------------|---------|-----------------------------------------------------------|---------|
-| `type`*        | Type                            | String  | `success` `info` `warning` `error`                        | —       |
-| `title`*       | Title                           | String  | —                                                         | —       |
-| `animation`    | Animation                       | String  | `fade-in` `fade-top` `fade-right` `fade-bottom` `fade-left` | `fade-in` |
-| `message`      | Title                           | String  | —                                                         | `''`    |
-| `duration`*    | Duration of the flare           | Number  | —                                                         | —       |
-| `borderRadius` | Border radius on the flare      | Boolean | —                                                         | `false` |
-| `backdropFilterBlur`*    | Blurred background on the flare | Boolean | —                                                         | `false` |
+| Name                 | Description                     | Type    | Values                                                    | Default   |
+|----------------------|---------------------------------|---------|-----------------------------------------------------------|-----------|
+| `type`*              | Type                            | String  | `success` `info` `warning` `error`                        | —         |
+| `title`*             | Title                           | String  | —                                                         | —         |
+| `animation`          | Animation                       | String  | `fade-in` `fade-top` `fade-right` `fade-bottom` `fade-left` | `fade-in` |
+| `message`            | Message                         | String  | —                                                         | `''`      |
+| `duration`*          | Duration of the flare           | Number  | —                                                         | —         |
+| `borderRadius`       | Border radius on the flare      | Boolean | —                                                         | `false`   |
+| `backdropFilterBlur` | Blurred background on the flare | Boolean | —                                                         | `false`   |
+| `hasIcon`            | Visible icon                    | Boolean | —                                                         | `true`    |
+| `hasLoading`         | Visible loading bar             | Boolean | —                                                         | `true`    |
+| `closable`           | Visible close icon              | Boolean | —                                                         | `true`    |
 
 ### `flare.setSettings({ ...options })`
 ```javascript
 flare.setSettings({
-    position: 'bottom-right',
-    animation: 'fade-right',
-    borderRadius: true,
-    backdropFilterBlur: true,
-    duration: 3000,
-    maxWidth: '600px'
+    position: 'top-right',
+    animation: 'fade-in',
+    borderRadius: false,
+    backdropFilterBlur: false,
+    duration: 5000,
+    maxWidth: '400px',
+    displayFromTop: true,
+    duplicationEnabled: true
 })
 ```
 
-| Name                 | Description                          | Type    | Values                                                     | Default  |
-|----------------------|--------------------------------------|---------|------------------------------------------------------------|----------|
-| `position`           | Position of the flares               | String  | `top-left` `top-right` `bottom-left` `bottom-right`        | `top-right` |
-| `animation`          | Animation                            | String  | `fade-in` `fade-top` `fade-right` `fade-bottom` `fade-left` | `fade-in` |
-| `borderRadius`       | Border radius on the flare           | Boolean | —                                                          | `false`  |
-| `backdropFilterBlur` | Blurred background on the flare      | Boolean | —                                                          | `false`  |
-| `duration`           | Duration of the flares in miliseconds | Number  | —                                                          | `5000` |
-| `maxWidth`           | Max width of flares in `px` or `%`     | String  | —                                                          | `400px`  |
+| Name                  | Description                                                    | Type    | Values                                                                           | Default     |
+|-----------------------|----------------------------------------------------------------|---------|----------------------------------------------------------------------------------|-------------|
+| `position`            | Position of the flares                                         | String  | `top-left` `top-right` `top-center` `bottom-left` `bottom-right` `bottom-center` | `top-right` |
+| `animation`           | Animation                                                      | String  | `fade-in` `fade-top` `fade-right` `fade-bottom` `fade-left`                      | `fade-in`   |
+| `borderRadius`        | Border radius on the flare                                     | Boolean | —                                                                                | `false`     |
+| `backdropFilterBlur`  | Blurred background on the flare                                | Boolean | —                                                                                | `false`     |
+| `duration`            | Duration of the flares in miliseconds                          | Number  | —                                                                                | `5000`      |
+| `maxWidth`            | Max width of flares in `px` or `%`                             | String  | —                                                                                | `400px`     |
+| `displayFromTop`      | Adds new notifications from the top, otherwise from the bottom | Boolean | —                                                                                | `true`      |
+| `duplicationEnabled`  | Allows you to have multiple notifications of the same type in the stack                             | Boolean | —                                                                                | `true`      |
 
 ## Development
 
