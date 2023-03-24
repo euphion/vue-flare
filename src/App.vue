@@ -107,7 +107,7 @@
 <script setup lang="ts">
 import Flares from '~/components/Flares.vue'
 import { useFlareStore } from '~/stores/FlareStore'
-import {reactive, watchEffect} from 'vue'
+import { reactive, watchEffect } from 'vue'
 import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
 
