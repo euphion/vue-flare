@@ -165,10 +165,11 @@ const flareClasses = computed(() => [
   }
 
   &-border-radius {
-    border-radius: 10px;
+    clip-path: inset(0 0 0 0 round 10px);
   }
 
   &-backdrop-filter-blur {
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
 
