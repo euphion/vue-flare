@@ -1,7 +1,7 @@
 {
   "name": "vue-flare",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": "Jakub Dvorak (https://www.linkedin.com/in/jakubdvorakone)",
   "type": "module",
@@ -18,6 +18,10 @@
     "./dist/style.css": "./dist/style.css"
   },
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/euphion/vue-flare.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
