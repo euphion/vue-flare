@@ -4,6 +4,8 @@
 
 **Check out the demo [vue-flare.web.app](https://vue-flare.web.app)**
 
+[![Alt text](https://raw.githubusercontent.com/euphion/vue-flare/main/src/assets/preview.jpg)](https://vue-flare.web.app)
+
 >  **Note**: Plugin uses **Pinia** store management
 
 ## Installation
