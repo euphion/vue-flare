@@ -97,6 +97,10 @@
         warning
       </button>
     </div>
+    <div class="links">
+      <a href="https://github.com/euphion/vue-flare" target="_blank">GitHub</a>
+      <a href="https://www.npmjs.com/package/vue-flare" target="_blank">NPM</a>
+    </div>
   </div>
 </template>
 
@@ -198,9 +202,22 @@ watchEffect(() => {
 
   .actions {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     justify-content: center;
     margin-top: 30px;
+  }
+
+  .links {
+    padding: 40px 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    a {
+      font-weight: bold;
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
   }
 }
 </style>
