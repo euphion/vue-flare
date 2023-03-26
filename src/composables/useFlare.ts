@@ -1,6 +1,6 @@
-import { ref} from 'vue'
+import { ref } from 'vue'
 import { FlareTypeEnum } from '~/enums/FlareTypeEnum'
-import { FlareInterface } from '~/interfaces/FlareInterface'
+import { FlareItemInterface } from '~/interfaces/FlareItemInterface'
 import { ShowInput } from '~/interfaces/ShowInterface'
 import { FlareSettingsInterface } from '~/interfaces/FlareSettingsInterface'
 import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
@@ -22,7 +22,7 @@ export function useFlare () {
     settings.value = { ...settings, ...newSettings }
   }
 
-  const flares = ref<FlareInterface[]>([])
+  const flares = ref<FlareItemInterface[]>([])
 
   function show ({
     id = self.crypto.randomUUID(),

@@ -2,12 +2,12 @@ import { App, } from 'vue'
 import Flares from './components/Flares.vue'
 import Flare from './components/Flare.vue'
 import { FlareSettingsInterface } from '~/interfaces/FlareSettingsInterface'
-import { FlareStoreInterface } from '~/interfaces/FlareStoreInterface'
+import { FlareInterface } from '~/interfaces/FlareInterface'
 import { useFlare } from '~/composables/useFlare'
 
 export default {
   install: (app: App, options: FlareSettingsInterface = {}) => {
-    const flare = useFlare() as FlareStoreInterface
+    const flare = useFlare() as FlareInterface
     flare.setSettings(options)
 
     app.config.globalProperties.$flare = flare
@@ -19,4 +19,4 @@ export default {
 }
 
 export { Flares, Flare }
-export type { FlareStoreInterface }
+export type { FlareInterface }

@@ -106,10 +106,10 @@
 
 <script setup lang="ts">
 import Flares from '~/components/Flares.vue'
-import {inject, reactive, watchEffect} from 'vue'
+import { inject, reactive, watchEffect } from 'vue'
 import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
-import {FlareStoreInterface} from '~/interfaces/FlareStoreInterface'
+import { FlareInterface } from '~/interfaces/FlareInterface'
 
 const settings = reactive({
   position: FlarePositionEnum.TOP_RIGHT,
@@ -127,10 +127,10 @@ const settings = reactive({
   displayFromTop: true
 })
 
-const flareStore = inject('flare') as FlareStoreInterface
+const flare = inject('flare') as FlareInterface
 
 function success () {
-  flareStore.success({
+  flare.success({
     title: settings.title,
     message: settings.message,
     duration: settings.duration,
@@ -141,7 +141,7 @@ function success () {
 }
 
 function info () {
-  flareStore.info({
+  flare.info({
     title: settings.title,
     message: settings.message,
     duration: settings.duration,
@@ -151,7 +151,7 @@ function info () {
 }
 
 function error () {
-  flareStore.error({
+  flare.error({
     title: settings.title,
     message: settings.message,
     duration: settings.duration,
@@ -161,7 +161,7 @@ function error () {
 }
 
 function warning () {
-  flareStore.warning({
+  flare.warning({
     title: settings.title,
     message: settings.message,
     duration: settings.duration,
@@ -171,7 +171,7 @@ function warning () {
 }
 
 watchEffect(() => {
-  flareStore.setSettings(settings)
+  flare.setSettings(settings)
 })
 </script>
 

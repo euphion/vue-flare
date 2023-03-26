@@ -6,8 +6,6 @@
 
 [![Alt text](https://raw.githubusercontent.com/euphion/vue-flare/main/src/assets/preview.jpg)](https://vue-flare.web.app)
 
->  **Note**: Plugin uses **Pinia** store management
-
 ## Installation
 
 ```bash
@@ -81,13 +79,13 @@ export default defineNuxtConfig({
 // App.vue
 
 import { computed, inject } from "vue";
-import { Flares, FlareStoreInterface } from "vue-flare"
+import { Flares, FlareInterface } from "vue-flare"
 
 // Access to the plugin
-const flare = inject('flare') as FlareStoreInterface
+const flare = inject('flare') as FlareInterface
 
-const activeFlares = computed(() => flare.flares)
-const activeSettings = computed(() => flare.settings)
+const activeFlares = computed(() => flare.flares.value)
+const activeSettings = computed(() => flare.settings.value)
 
 function show () {
     // Examples
@@ -149,7 +147,7 @@ You can use custom component for notifications inside the `<Flares />` component
   <div>
     <Flares>
       <Flare
-          v-for="{ id, type, title, message, duration, hasIcon, hasLoading, closable } of flare.flares"
+          v-for="{ id, type, title, message, duration, hasIcon, hasLoading, closable } of flare.flares.value"
           :key="`flare-${id}`"
           :type="type"
           :title="title"
