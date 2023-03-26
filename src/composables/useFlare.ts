@@ -1,6 +1,4 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
-import { FlareStoreInterface } from '~/interfaces/FlareStoreInterface'
+import { ref} from 'vue'
 import { FlareTypeEnum } from '~/enums/FlareTypeEnum'
 import { FlareInterface } from '~/interfaces/FlareInterface'
 import { ShowInput } from '~/interfaces/ShowInterface'
@@ -8,7 +6,7 @@ import { FlareSettingsInterface } from '~/interfaces/FlareSettingsInterface'
 import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
 import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 
-export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface => {
+export function useFlare () {
   const settings = ref<FlareSettingsInterface>({
     position: FlarePositionEnum.TOP_RIGHT,
     animation: FlareAnimationEnum.FADE_IN,
@@ -21,7 +19,7 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
   })
 
   function setSettings(newSettings: FlareSettingsInterface) {
-    settings.value = { ...settings.value, ...newSettings }
+    settings.value = { ...settings, ...newSettings }
   }
 
   const flares = ref<FlareInterface[]>([])
@@ -72,4 +70,4 @@ export const useFlareStore = defineStore('FlareStore', (): FlareStoreInterface =
   }
 
   return { settings, setSettings, flares, hide, success, info, error, warning }
-})
+}

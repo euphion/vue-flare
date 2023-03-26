@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "eslint-plugin-vue": "^9.9.0",
-    "pinia": "^2.0.33",
     "sass": "^1.58.3",
     "vue": "^3.2.45"
   },

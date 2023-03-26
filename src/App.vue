@@ -106,10 +106,10 @@
 
 <script setup lang="ts">
 import Flares from '~/components/Flares.vue'
-import { useFlareStore } from '~/stores/FlareStore'
-import { reactive, watchEffect } from 'vue'
+import {inject, reactive, watchEffect} from 'vue'
 import { FlareAnimationEnum } from '~/enums/FlareAnimationEnum'
 import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
+import {FlareStoreInterface} from '~/interfaces/FlareStoreInterface'
 
 const settings = reactive({
   position: FlarePositionEnum.TOP_RIGHT,
@@ -127,7 +127,7 @@ const settings = reactive({
   displayFromTop: true
 })
 
-const flareStore = useFlareStore()
+const flareStore = inject('flare') as FlareStoreInterface
 
 function success () {
   flareStore.success({

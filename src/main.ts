@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import '~/style.css'
 import App from '~/App.vue'
-import { createPinia } from 'pinia'
+import VueFlare from './index'
 
-createApp(App).use(createPinia()).mount('#app')
+createApp(App).use(VueFlare).mount('#app')

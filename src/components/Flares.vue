@@ -1,11 +1,11 @@
 <template>
   <div
     :class="flaresClasses"
-    :style="{ maxWidth: flareStore.settings.maxWidth }"
+    :style="{ maxWidth: flareStore.settings.value.maxWidth }"
   >
     <slot v-if="$slots.default" />
     <Flare
-      v-for="{ id, type, title, message, duration, hasIcon, hasLoading, closable } of flareStore.flares"
+      v-for="{ id, type, title, message, duration, hasIcon, hasLoading, closable } of myFlares"
       v-else
       :key="`flare-${id}`"
       :type="type"
@@ -15,9 +15,9 @@
       :closable="closable"
       :has-icon="hasIcon"
       :has-loading="hasLoading"
-      :animation="flareStore.settings.animation"
-      :border-radius="flareStore.settings.borderRadius"
-      :backdrop-filter-blur="flareStore.settings.backdropFilterBlur"
+      :animation="flareStore.settings.value.animation"
+      :border-radius="flareStore.settings.value.borderRadius"
+      :backdrop-filter-blur="flareStore.settings.value.backdropFilterBlur"
       @close="flareStore.hide(id)"
     />
   </div>
@@ -25,21 +25,25 @@
 
 <script setup lang="ts">
 import Flare from '~/components/Flare.vue'
-import { useFlareStore } from '~/stores/FlareStore'
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { FlarePositionEnum } from '~/enums/FlarePositionEnum'
+import { FlareStoreInterface } from '~/interfaces/FlareStoreInterface'
 
-const flareStore = useFlareStore()
+const flareStore = inject('flare') as FlareStoreInterface
+
+const myFlares = computed(() => {
+  return flareStore.flares.value
+})
 
 const flaresClasses = computed(() => [
   'flares',
   {
-    'flares-top-left': flareStore.settings.position === FlarePositionEnum.TOP_LEFT,
-    'flares-top-right': flareStore.settings.position === FlarePositionEnum.TOP_RIGHT,
-    'flares-top-center': flareStore.settings.position === FlarePositionEnum.TOP_CENTER,
-    'flares-bottom-left': flareStore.settings.position === FlarePositionEnum.BOTTOM_LEFT,
-    'flares-bottom-right': flareStore.settings.position === FlarePositionEnum.BOTTOM_RIGHT,
-    'flares-bottom-center': flareStore.settings.position === FlarePositionEnum.BOTTOM_CENTER,
+    'flares-top-left': flareStore.settings.value.position === FlarePositionEnum.TOP_LEFT,
+    'flares-top-right': flareStore.settings.value.position === FlarePositionEnum.TOP_RIGHT,
+    'flares-top-center': flareStore.settings.value.position === FlarePositionEnum.TOP_CENTER,
+    'flares-bottom-left': flareStore.settings.value.position === FlarePositionEnum.BOTTOM_LEFT,
+    'flares-bottom-right': flareStore.settings.value.position === FlarePositionEnum.BOTTOM_RIGHT,
+    'flares-bottom-center': flareStore.settings.value.position === FlarePositionEnum.BOTTOM_CENTER,
   }
 ])
 </script>
