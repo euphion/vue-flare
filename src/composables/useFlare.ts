@@ -19,7 +19,7 @@ export function useFlare () {
   })
 
   function setSettings(newSettings: FlareSettingsInterface) {
-    settings.value = { ...settings, ...newSettings }
+    settings.value = { ...settings.value, ...newSettings }
   }
 
   const flares = ref<FlareItemInterface[]>([])
