@@ -228,6 +228,12 @@ const flareClasses = computed(() => [
     top: 5px;
     cursor: pointer;
     opacity: .7;
+    width: 25px;
+    height: 25px;
+
+    &:focus {
+      outline: none;
+    }
 
     &:hover {
       opacity: 1;
